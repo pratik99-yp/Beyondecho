@@ -9,6 +9,7 @@ export default function ChatWindow({
   onSuggestion,
   sidebarOpen,
   onToggleSidebar,
+  audioUrls,
 }) {
   const bottomRef = useRef(null)
 
@@ -43,7 +44,7 @@ export default function ChatWindow({
         ) : (
           <div className="max-w-3xl mx-auto w-full py-4">
             {messages.map((msg) => (
-              <Message key={msg.id} message={msg} />
+              <Message key={msg.id} message={msg} audioUrl={audioUrls?.[msg.id]} />
             ))}
             <div ref={bottomRef} />
           </div>

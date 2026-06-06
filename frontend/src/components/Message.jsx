@@ -3,6 +3,7 @@ import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Zap, AlertCircle } from 'lucide-react'
+import AudioPlayer from './AudioPlayer'
 
 function CodeBlock({ inline, className, children, ...props }) {
   const match = /language-(\w+)/.exec(className || '')
@@ -36,7 +37,7 @@ const markdownComponents = {
   code: CodeBlock,
 }
 
-export default function Message({ message }) {
+export default function Message({ message, audioUrl }) {
   const { role, content, streaming } = message
 
   if (role === 'user') {
@@ -96,6 +97,8 @@ export default function Message({ message }) {
             style={{ background: '#8ab4f8' }}
           />
         )}
+
+        {audioUrl && !streaming && <AudioPlayer src={audioUrl} autoPlay />}
       </div>
     </div>
   )
