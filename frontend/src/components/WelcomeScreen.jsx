@@ -1,59 +1,70 @@
 import { Zap } from 'lucide-react'
 
 const suggestions = [
-  { label: 'Explain quantum computing', icon: '⚛️' },
-  { label: 'Write a Python script to sort a list', icon: '🐍' },
-  { label: 'Help me plan my week', icon: '📅' },
-  { label: 'What are the latest trends in AI?', icon: '🤖' },
+  {
+    icon: '⚡',
+    title: 'Quick summary',
+    prompt: 'Summarize the key differences between REST and GraphQL APIs',
+  },
+  {
+    icon: '🐍',
+    title: 'Write code',
+    prompt: 'Write a Python async function that fetches data from multiple URLs concurrently',
+  },
+  {
+    icon: '🎨',
+    title: 'Creative help',
+    prompt: 'Give me 5 creative project name ideas for an AI voice assistant startup',
+  },
+  {
+    icon: '🧠',
+    title: 'Explain concepts',
+    prompt: 'Explain how transformer attention mechanisms work in simple terms',
+  },
 ]
 
 export default function WelcomeScreen({ onSuggestion }) {
   return (
-    <div className="flex flex-col items-center justify-center flex-1 px-6 py-12 animate-fade-in">
-      <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
-        style={{ background: 'linear-gradient(135deg, #8ab4f8 0%, #c58af9 100%)' }}
-      >
-        <Zap size={30} className="text-white" fill="white" />
+    <div className="flex flex-col items-center justify-center h-full px-4 py-10 animate-fade-in select-none">
+      {/* Logo */}
+      <div className="relative mb-7">
+        <div
+          className="w-20 h-20 rounded-3xl flex items-center justify-center shadow-glow-blue"
+          style={{ background: 'linear-gradient(135deg, #7c9ef8 0%, #b87af8 100%)' }}
+        >
+          <Zap size={36} className="text-white" fill="white" />
+        </div>
+        <div
+          className="absolute inset-0 rounded-3xl opacity-40 blur-xl"
+          style={{ background: 'linear-gradient(135deg, #7c9ef8, #b87af8)', zIndex: -1 }}
+        />
       </div>
 
-      <h1 className="text-3xl font-semibold mb-2 text-center">
-        <span
-          style={{
-            background: 'linear-gradient(135deg, #8ab4f8 0%, #c58af9 60%, #81c995 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          Hello, there
-        </span>
+      {/* Heading */}
+      <h1 className="text-4xl font-bold mb-2 tracking-tight">
+        <span className="gradient-text">Hello, there</span>
       </h1>
-      <p className="text-[#9aa0a6] text-[15px] mb-10">How can I help you today?</p>
+      <p className="text-text-secondary text-[15px] mb-10 text-center max-w-sm">
+        Ask me anything — or clone your voice so I can speak back in your own words.
+      </p>
 
-      <div className="grid grid-cols-2 gap-3 w-full max-w-xl">
+      {/* Suggestions grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl">
         {suggestions.map((s) => (
           <button
-            key={s.label}
-            onClick={() => onSuggestion(s.label)}
-            className="flex items-start gap-3 p-4 rounded-2xl text-left transition-all group"
-            style={{
-              background: '#1e1f20',
-              border: '1px solid #2a2b2d',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#2a2b2d'
-              e.currentTarget.style.borderColor = '#3a3b3d'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#1e1f20'
-              e.currentTarget.style.borderColor = '#2a2b2d'
-            }}
+            key={s.title}
+            onClick={() => onSuggestion(s.prompt)}
+            className="suggestion-card group animate-slide-up"
           >
-            <span className="text-xl mt-0.5">{s.icon}</span>
-            <span className="text-sm text-[#c4c7cc] leading-snug group-hover:text-white transition-colors">
-              {s.label}
-            </span>
+            <div className="flex items-center gap-2.5 mb-1.5">
+              <span className="text-xl">{s.icon}</span>
+              <span className="text-xs font-semibold uppercase tracking-widest text-text-muted group-hover:text-text-secondary transition-colors">
+                {s.title}
+              </span>
+            </div>
+            <p className="text-sm text-text-secondary group-hover:text-text-primary transition-colors leading-snug">
+              {s.prompt}
+            </p>
           </button>
         ))}
       </div>
