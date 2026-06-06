@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #131314;
+    color: #e3e3e3;
+    font-family: 'Google Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3a3b3d;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5a5b5d;
+  }
+}
+
+@layer components {
+  /* Markdown prose styles for AI messages */
+  .prose-echo {
+    color: #e3e3e3;
+    line-height: 1.7;
+    font-size: 0.9375rem;
+  }
+
+  .prose-echo p {
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-echo p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose-echo h1 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .prose-echo h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .prose-echo h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0.875rem 0 0.375rem;
+  }
+
+  .prose-echo ul {
+    list-style: disc;
+    margin: 0.5rem 0 0.75rem 1.25rem;
+  }
+
+  .prose-echo ol {
+    list-style: decimal;
+    margin: 0.5rem 0 0.75rem 1.25rem;
+  }
+
+  .prose-echo li {
+    margin-bottom: 0.25rem;
+  }
+
+  .prose-echo code {
+    background: #2a2b2d;
+    border: 1px solid #3a3b3d;
+    border-radius: 4px;
+    padding: 0.15em 0.4em;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    color: #81c995;
+  }
+
+  .prose-echo pre {
+    background: #1e1f20;
+    border: 1px solid #2a2b2d;
+    border-radius: 10px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 0.75rem 0;
+  }
+
+  .prose-echo pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #e3e3e3;
+    font-size: 0.875rem;
+  }
+
+  .prose-echo blockquote {
+    border-left: 2px solid #8ab4f8;
+    padding-left: 0.875rem;
+    color: #9aa0a6;
+    font-style: italic;
+    margin: 0.75rem 0;
+  }
+
+  .prose-echo a {
+    color: #8ab4f8;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-echo a:hover {
+    color: #aecbfa;
+  }
+
+  .prose-echo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+  }
+
+  .prose-echo th {
+    background: #2a2b2d;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #3a3b3d;
+    color: #fff;
+  }
+
+  .prose-echo td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #3a3b3d;
+  }
+
+  .prose-echo tr:nth-child(even) td {
+    background: #1e1f20;
+  }
+
+  .prose-echo strong {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .prose-echo em {
+    font-style: italic;
+  }
+
+  .prose-echo hr {
+    border: none;
+    border-top: 1px solid #3a3b3d;
+    margin: 1rem 0;
+  }
+
+  /* Input focus glow */
+  .input-glow:focus-within {
+    box-shadow: 0 0 0 1px #8ab4f840, 0 2px 20px #8ab4f820;
+  }
+}
