@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Env files
+.env
+*.env.local
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# Locks (keep package-lock for reproducibility)
+# package-lock.json  ← intentionally tracked
+
+# IDE
+.vscode/
+.idea/
+*.swp
