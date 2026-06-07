@@ -14,11 +14,12 @@ class CoquiProvider(VoiceProvider):
     def __init__(self, base_url: str = _DEFAULT_URL):
         self._base = base_url.rstrip("/")
 
-    async def clone_voice(self, audio_bytes: bytes, name: str) -> str:
+    async def clone_voice(self, audio_bytes: bytes, name: str, content_type: str = "audio/webm") -> str:
+        ext = content_type.split("/")[-1].split(";")[0] or "webm"
         async with httpx.AsyncClient(timeout=60) as client:
             r = await client.post(
                 f"{self._base}/clone",
-                files={"file": ("sample.wav", audio_bytes, "audio/wav")},
+                files={"file": (f"sample.{ext}", audio_bytes, content_type)},
                 data={"name": name},
             )
             r.raise_for_status()
