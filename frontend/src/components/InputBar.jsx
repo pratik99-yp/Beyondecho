@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
-import { Send, Wifi, WifiOff } from 'lucide-react'
+import { Send, Wifi, WifiOff, Volume2, VolumeX } from 'lucide-react'
 
-export default function InputBar({ onSend, isStreaming, isConnected }) {
+export default function InputBar({ onSend, isStreaming, isConnected, voiceEnabled, hasVoice, onToggleVoice }) {
   const [value, setValue] = useState('')
   const textareaRef = useRef(null)
 
@@ -64,6 +64,19 @@ export default function InputBar({ onSend, isStreaming, isConnected }) {
           />
 
           <div className="flex items-center gap-2 shrink-0">
+            {/* Voice toggle */}
+            {hasVoice && (
+              <button
+                onClick={onToggleVoice}
+                title={voiceEnabled ? 'Voice on — click to mute' : 'Voice off — click to enable'}
+                className="transition-colors"
+              >
+                {voiceEnabled
+                  ? <Volume2 size={15} className="text-[#81c995]" />
+                  : <VolumeX size={15} className="text-[#5a5b5d]" />}
+              </button>
+            )}
+
             {/* Connection indicator */}
             <div title={isConnected ? 'Connected' : 'Reconnecting…'}>
               {isConnected ? (

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.chat import router as chat_router
+from routers.voice import router as voice_router
 from config import CORS_ORIGINS
 
 app = FastAPI(title="BeyondEcho API", version="0.1.0")
@@ -14,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(chat_router)
+app.include_router(voice_router)
 
 
 @app.get("/health")

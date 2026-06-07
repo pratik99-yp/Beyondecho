@@ -1,6 +1,6 @@
-import { Plus, MessageSquare, Menu, Zap } from 'lucide-react'
+import { Plus, MessageSquare, Menu, Zap, Mic, Volume2, VolumeX } from 'lucide-react'
 
-export default function Sidebar({ isOpen, onToggle, onNewChat, hasMessages }) {
+export default function Sidebar({ isOpen, onToggle, onNewChat, hasMessages, voiceId, voiceEnabled, onVoiceSetup, onToggleVoice }) {
   return (
     <aside
       className="flex flex-col shrink-0 overflow-hidden transition-all duration-300"
@@ -52,8 +52,29 @@ export default function Sidebar({ isOpen, onToggle, onNewChat, hasMessages }) {
         )}
       </div>
 
-      <div className="px-4 py-3 border-t border-[#2a2b2d]">
-        <p className="text-[11px] text-[#5a5b5d]">BeyondEcho · Phase 1</p>
+      <div className="px-3 py-3 border-t border-[#2a2b2d] space-y-1">
+        {/* Voice setup button */}
+        <button
+          onClick={onVoiceSetup}
+          className="flex items-center gap-2.5 w-full px-3 py-2 rounded-xl transition-colors text-[#9aa0a6] hover:bg-[#2a2b2d] hover:text-[#e3e3e3] group"
+        >
+          <Mic size={15} className="shrink-0" />
+          <span className="text-sm flex-1 text-left">
+            {voiceId ? 'Voice registered ✓' : 'Set up voice'}
+          </span>
+          {voiceId && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onToggleVoice() }}
+              className="p-1 rounded-md hover:bg-[#3a3b3d] transition-colors"
+              title={voiceEnabled ? 'Disable voice' : 'Enable voice'}
+            >
+              {voiceEnabled
+                ? <Volume2 size={13} className="text-[#81c995]" />
+                : <VolumeX size={13} className="text-[#9aa0a6]" />}
+            </button>
+          )}
+        </button>
+        <p className="text-[11px] text-[#5a5b5d] px-3">BeyondEcho · Phase 2</p>
       </div>
     </aside>
   )
