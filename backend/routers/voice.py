@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.responses import Response
 from services.voice.factory import get_voice_provider
+from services.stt.factory import get_stt_provider
 
 router = APIRouter(prefix="/voice", tags=["voice"])
 
@@ -44,3 +45,16 @@ async def delete_voice(voice_id: str):
         return {"status": "deleted"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/transcribe")
+async def transcribe(file: UploadFile = File(...)):
+    try:
+        stt = get_stt_provider()
+        audio_bytes = await file.read()
+        text = await stt.transcribe(audio_bytes, file.content_type or "audio/webm")
+        return {"text": text}
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Transcription failed: {e}")
